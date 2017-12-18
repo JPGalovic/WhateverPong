@@ -35,13 +35,10 @@ public class BallMove : MonoBehaviour {
         transform.position += new Vector3(deltaX * speed, deltaY * speed);
 
         if (transform.position.x <= clampMinX)
-            Score();
+            ScoreRight();
 
         if (transform.position.x >= clampMaxX)
-        {
-            ReflectX();
-            transform.position = position; // Step back;
-        }
+            ScoreLeft();
 
         if (transform.position.y <= clampMinY || transform.position.y >= clampMaxY)
         {
@@ -67,9 +64,16 @@ public class BallMove : MonoBehaviour {
         speed = speed * deltaDifficulty;
     }
 
-    private void Score()
+    private void ScoreLeft()
     {
-        GameObject.Find("GameScore").SendMessage("Deduct");
+        GameObject.Find("GameScoreLeft").SendMessage("Add");
+        this.gameObject.transform.position = new Vector3(0, 0);
+        speed = 1.0f;
+    }
+
+    private void ScoreRight()
+    {
+        GameObject.Find("GameScoreRight").SendMessage("Add");
         this.gameObject.transform.position = new Vector3(0, 0);
         speed = 1.0f;
     }

@@ -11,8 +11,8 @@ public class ScoreKeep : MonoBehaviour {
         this.gameObject.GetComponent<Text>().text = "Score: " + score.ToString();
 	}
 
-    public void Deduct()
+    public void Add()
     {
-        score--;
+        score++;
     }
 }
